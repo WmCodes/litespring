@@ -17,14 +17,19 @@ public  abstract class AbstractApplicationContext implements ApplicationContext 
 
     private DefaultBeanFactory factory = null;
 
+
+
     public AbstractApplicationContext(String configFile){
+        this(configFile,ClassUtils.getDefaultClassLoader());
+    }
+
+    public AbstractApplicationContext(String configFile,ClassLoader cl){
         factory = new DefaultBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
         Resource resource = this.getResourceByPath(configFile);
         reader.loadBeanDefinitions(resource);
-        factory.setBeanClassLoader(this.getBeanClassLoader());
+        factory.setBeanClassLoader(cl);
     }
-
 
     @Override
     public Object getBean(String beanID) {
