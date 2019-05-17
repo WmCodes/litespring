@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.litespring.context.ApplicationContext;
 import org.litespring.context.support.ClassPathXmlApplicationContext;
+import org.litespring.dao.v2.AccountDao;
+import org.litespring.dao.v2.ItemDao;
 import org.litespring.service.v2.PetStoreService;
 
 /**
@@ -20,5 +22,9 @@ public class ApplicationContextTestV2 {
 
         Assert.assertNotNull(petStore.getAccountDao());
         Assert.assertNotNull(petStore.getItemDao());
+
+        Assert.assertTrue(petStore.getAccountDao() instanceof AccountDao);
+        Assert.assertTrue(petStore.getItemDao() instanceof ItemDao);
+        Assert.assertEquals(petStore.getOwner(),"test");
     }
 }
